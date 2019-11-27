@@ -86,7 +86,7 @@ WSGI_APPLICATION = 'puro.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'djongo',
-        'NAME': 'local_db',
+        'NAME': 'locale',
     }
 }
 

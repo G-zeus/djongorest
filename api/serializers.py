@@ -1,31 +1,36 @@
-from rest_framework import serializers
+from rest_framework import serializers, generics
 from .models import Producto, Categoria, SubCategoria
- 
+
+
 class ProductoSerializer(serializers.ModelSerializer):
     class Meta:
-        model= Producto
+        model = Producto
         fields = '__all__'
+
 
 class CategoriaSerializer(serializers.ModelSerializer):
     class Meta:
         model = Categoria
-        fields= '__all__'
- 
+        fields = '__all__'
+
+
 class SubCategoriaSerializer(serializers.ModelSerializer):
-        class Meta:
-            model = SubCategoria
-            fields= '__all__'
+    class Meta:
+        model = SubCategoria
+        fields = '__all__'
+
 
 class CategoriaList(generics.ListCreateAPIView):
     queryset = Categoria.objects.all()
     serializer_class = CategoriaSerializer
- 
+
+
 class SubCategoriaList(generics.ListCreateAPIView):
     queryset = SubCategoria.objects.all()
     serializer_class = SubCategoriaSerializer
 
 # Los métodos de la clase ProductoSerializer
-        
+
 # La clase ProductoSerializer construida en la clase anterior, tiene varios métodos:
 
 # is_valid(self, ...): Dice si la data es suficiente y válida
