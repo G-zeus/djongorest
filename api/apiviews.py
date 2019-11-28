@@ -4,9 +4,9 @@
 from rest_framework import generics, status, viewsets
 from rest_framework.views import APIView
 from rest_framework.response import Response
-
+from django.contrib.auth import authenticate
 from .models import Producto, Categoria, SubCategoria
-from .serializers import ProductoSerializer, CategoriaSerializer, SubCategoriaSerializer
+from .serializers import ProductoSerializer, CategoriaSerializer, SubCategoriaSerializer, UserSerializer
 
 
 # class ProductoList(APIView):
@@ -104,3 +104,22 @@ Bueno y con esto terminamos esta sección y ya sólo nos falta ver cómo tener c
 api.
 
 """
+
+
+class UserCreate(generics.CreateAPIView):
+    authentication_classes = ()
+    permission_classes = ()
+    serializer_class = UserSerializer
+
+
+class LioginView(APIView):
+    permission_classes = ()
+
+    def post(self, request):
+        username = request.data.get("username")
+        password = request.data.get("password")
+        user = authenticate(username=username, password=password)
+        if user:
+            return Response({"token": user.auth_token.key})
+        else:
+            return Response({"error": "Credenciales Incorrectas"}, status=status.HTTP_400_BAD_REQUEST)
