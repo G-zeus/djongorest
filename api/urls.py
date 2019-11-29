@@ -3,6 +3,8 @@ from rest_framework.routers import DefaultRouter
 # Importar vistas de DRF para authtoken
 from rest_framework.authtoken import views
 
+from rest_framework.documentation import include_docs_urls
+
 from api.apiviews import ProductoList, CategoriaSave, SubCategoriaSave,\
     ProductoDetalle, CategoriaDetalle, SubCategoriaList, CategoriaList,\
     SubCategoriaAdd, ProductoViewSet, UserCreate, LioginView
@@ -31,6 +33,7 @@ urlpatterns = [
     path('v4/login/', LioginView.as_view(), name='login  '),
     #Importar vistas de DRF para authtoken
     path("v3/login-drf/", views.obtain_auth_token, name="login_drf"),
+    path("docs/", include_docs_urls(title='Documentacion')),
 
 ]
 

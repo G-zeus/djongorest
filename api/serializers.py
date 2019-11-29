@@ -5,6 +5,8 @@ from django.contrib.auth.models import User
 
 
 class ProductoSerializer(serializers.ModelSerializer):
+    owner = serializers.HiddenField(default=serializers.CurrentUserDefault())
+
     class Meta:
         model = Producto
         fields = '__all__'

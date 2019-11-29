@@ -7,7 +7,8 @@ from rest_framework.response import Response
 from django.contrib.auth import authenticate
 from .models import Producto, Categoria, SubCategoria
 from .serializers import ProductoSerializer, CategoriaSerializer, SubCategoriaSerializer, UserSerializer
-
+from .permissions import IsOWner
+from  rest_framework.permissions import IsAuthenticated
 
 # class ProductoList(APIView):
 #    def get(self,request):
@@ -77,6 +78,7 @@ class SubCategoriaAdd(APIView):
 class ProductoViewSet(viewsets.ModelViewSet):
     queryset = Producto.objects.all()
     serializer_class = ProductoSerializer
+    permission_classes = [IsAuthenticated, IsOWner]
 
 
 """
